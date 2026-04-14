@@ -1,6 +1,7 @@
 'use strict';
 require('dotenv').config();
 
+const path    = require('path');
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
@@ -81,7 +82,20 @@ app.use('/api/payments',     paymentsRouter);
 app.use('/api/dashboard',    dashboardRouter);
 app.use('/api/webhook',      webhookRouter);
 
-// ─── 404 ──────────────────────────────────────────────────────────────────────
+// ─── Serve frontend build (production) ───────────────────────────────────────
+if (config.env === 'production') {
+  const dist = path.resolve(__dirname, '../../dist');
+  app.use(express.static(dist, { index: false })); // handle index explicitly below
+  // All non-API GET requests return the SPA shell
+  app.get('*', (req, res) => {
+    if (req.path.startsWith('/api')) {
+      return res.status(404).json({ error: `Route ${req.method} ${req.path} not found` });
+    }
+    res.sendFile(path.join(dist, 'index.html'));
+  });
+}
+
+// ─── 404 (development only) ───────────────────────────────────────────────────
 app.use((req, res) => {
   res.status(404).json({ error: `Route ${req.method} ${req.path} not found` });
 });

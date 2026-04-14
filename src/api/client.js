@@ -1,4 +1,6 @@
-const BASE = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+// In production, frontend is served from the same origin as the backend,
+// so relative URLs work. In dev, Vite's proxy forwards /api → :4000.
+const BASE = import.meta.env.VITE_API_URL || '';
 
 function getToken() {
   return localStorage.getItem('procura_token');

@@ -1,0 +1,9 @@
+[build]
+buildCommand = "npm install && npm install --prefix backend && npm run build"
+
+[deploy]
+startCommand = "node backend/src/db/migrate.js && node backend/src/index.js"
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 10
