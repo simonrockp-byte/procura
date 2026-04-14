@@ -22,9 +22,10 @@ build/
 .DS_Store
 Thumbs.db
 
-# Editor
+# Editor / IDE
 .vscode/
 .idea/
+.claude/
 *.swp
 *.swo
 
