@@ -18,6 +18,8 @@ const suppliersRouter    = require('./routes/suppliers');
 const deliveriesRouter   = require('./routes/deliveries');
 const paymentsRouter     = require('./routes/payments');
 const dashboardRouter    = require('./routes/dashboard');
+const officersRouter     = require('./routes/officers');
+const reportsRouter      = require('./routes/reports');
 const webhookRouter      = require('./routes/webhook');
 
 const app = express();
@@ -80,6 +82,8 @@ app.use('/api/suppliers',    suppliersRouter);
 app.use('/api/deliveries',   deliveriesRouter);
 app.use('/api/payments',     paymentsRouter);
 app.use('/api/dashboard',    dashboardRouter);
+app.use('/api/officers',     officersRouter);
+app.use('/api/reports',       reportsRouter);
 app.use('/api/webhook',      webhookRouter);
 
 // ─── Serve frontend build (production) ───────────────────────────────────────

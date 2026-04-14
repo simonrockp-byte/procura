@@ -97,6 +97,11 @@ const schemas = {
   acknowledgeEscalation: z.object({
     escalation_id: z.string().uuid(),
   }),
+
+  updateOfficer: z.object({
+    role: z.enum(['Officer', 'Manager', 'Executive', 'Auditor']).optional(),
+    is_active: z.boolean().optional(),
+  }),
 };
 
 module.exports = { validate, schemas };

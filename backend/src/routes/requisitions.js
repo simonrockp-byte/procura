@@ -222,11 +222,18 @@ router.patch(
           }
         }
 
-        const updated = await client.query(
-          `UPDATE requisitions SET status = $1, updated_at = NOW()
-           WHERE id = $2 RETURNING *`,
-          [newStatus, req_.id]
-        );
+        let query = 'UPDATE requisitions SET status = $1, updated_at = NOW()';
+        const params = [newStatus];
+
+        if (newStatus === 'Approved') {
+          query += ', approved_by = $2, approved_at = NOW()';
+          params.push(actorId);
+        }
+
+        query += ` WHERE id = $${params.length + 1} RETURNING *`;
+        params.push(req_.id);
+
+        const updated = await client.query(query, params);
 
         await audit.log(client, {
           orgId,

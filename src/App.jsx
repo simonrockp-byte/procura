@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import { useAuth } from './context/AuthContext';
 import Login        from './pages/Login';
@@ -7,11 +7,18 @@ import Requisitions from './pages/Requisitions';
 import Suppliers    from './pages/Suppliers';
 import Escalations  from './pages/Escalations';
 import AuditLog     from './pages/AuditLog';
+import Deliveries   from './pages/Deliveries';
+import Payments     from './pages/Payments';
+import Officers     from './pages/Officers';
+import AcceptInvite from './pages/AcceptInvite';
 
 const NAV = [
   { id: 'dashboard',    label: 'Dashboard',    icon: '📊', roles: ['Officer','Manager','Executive','Auditor'] },
   { id: 'requisitions', label: 'Requisitions', icon: '📑', roles: ['Officer','Manager','Executive','Auditor'] },
   { id: 'suppliers',    label: 'Suppliers',    icon: '🤝', roles: ['Officer','Manager','Executive','Auditor'] },
+  { id: 'deliveries',   label: 'Deliveries',   icon: '📦', roles: ['Officer','Manager','Executive','Auditor'] },
+  { id: 'payments',     label: 'Payments',     icon: '💰', roles: ['Manager','Executive'] },
+  { id: 'officers',     label: 'Officers',     icon: '👥', roles: ['Manager','Executive','Auditor'] },
   { id: 'escalations',  label: 'Escalations',  icon: '🚨', roles: ['Manager','Executive'] },
   { id: 'audit',        label: 'Audit Log',    icon: '🔐', roles: ['Executive','Auditor'] },
 ];
@@ -36,7 +43,7 @@ function Sidebar({ tab, setTab, user, logout }) {
           <div style={{ fontWeight:600, fontSize:'0.9rem' }}>{user?.full_name}</div>
           <div style={{ color:'var(--text-secondary)', fontSize:'0.78rem' }}>{user?.role} · {user?.email}</div>
         </div>
-        <a className="nav-item" onClick={logout} style={{ color:'#f43f5e' }}>🚪 Sign Out</a>
+        <a className="nav-item" onClick={logout} style={{ color:'#f43f5e', cursor: 'pointer' }}>🚪 Sign Out</a>
       </div>
     </aside>
   );
@@ -45,6 +52,18 @@ function Sidebar({ tab, setTab, user, logout }) {
 export default function App() {
   const { user, isAuthed, logout } = useAuth();
   const [tab, setTab] = useState('dashboard');
+  const [path, setPath] = useState(window.location.pathname);
+
+  useEffect(() => {
+    const handlePopState = () => setPath(window.location.pathname);
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Handle unauthed routes first
+  if (path === '/accept-invite') {
+    return <AcceptInvite />;
+  }
 
   if (!isAuthed) return <Login />;
 
@@ -52,6 +71,9 @@ export default function App() {
     dashboard:    <Dashboard setTab={setTab} />,
     requisitions: <Requisitions />,
     suppliers:    <Suppliers />,
+    deliveries:   <Deliveries />,
+    payments:     <Payments />,
+    officers:     <Officers />,
     escalations:  <Escalations />,
     audit:        <AuditLog />,
   };

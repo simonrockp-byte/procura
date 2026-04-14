@@ -277,6 +277,25 @@ export default function Requisitions() {
                 ))}
               </div>
             )}
+            {user?.role === 'Executive' && (
+              <button 
+                className="btn-ghost" 
+                style={{ marginTop: '0.5rem', width: '100%', borderColor: 'var(--accent-color)', color: 'var(--accent-color)' }}
+                onClick={async () => {
+                  try {
+                    const report = await api.get(`/api/reports/incident/${selected.id}`);
+                    const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `incident-report-${selected.ref_number}.json`;
+                    a.click();
+                  } catch (e) { alert(e.message); }
+                }}
+              >
+                📄 Generate Incident Report (JSON)
+              </button>
+            )}
           </div>
         </Modal>
       )}
