@@ -36,17 +36,19 @@ export default function Login() {
         <div className="glass-panel animate-fade-in" style={{ width: '100%', maxWidth: 420, padding: '3rem' }}>
           <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
             <div style={{ 
-              width: 56, 
-              height: 56, 
-              background: 'linear-gradient(135deg, var(--accent-color), #d97706)', 
-              borderRadius: 14, 
-              margin: '0 auto 1.25rem', 
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'center',
-              boxShadow: '0 8px 16px var(--accent-glow)'
+              width: 72, 
+              height: 72, 
+              margin: '0 auto 1.25rem',
+              borderRadius: '16px',
+              overflow: 'hidden',
+              boxShadow: '0 8px 16px var(--accent-glow)',
+              background: '#020617'
             }}>
-              <span style={{ fontSize: 28, fontWeight: 'bold', color: '#000' }}>P</span>
+              <img 
+                src="/procura-logo.png" 
+                alt="Procura Logo" 
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+              />
             </div>
             <h1 className="text-gradient" style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>PROCURA</h1>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>Procurement Compliance Platform</p>
@@ -104,7 +106,6 @@ export default function Login() {
         flex: '1.2', 
         background: 'linear-gradient(135deg, #0f172a 0%, #020617 100%)',
         position: 'relative',
-        display: 'none', // Hidden on mobile via CSS but we use inline for simplicity here
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
