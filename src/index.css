@@ -58,7 +58,7 @@ body::after {
 
 /* Layout */
 #root {
-  display: flex;
+  display: block; /* Removed flex from root to allow component-level layout control */
   min-height: 100vh;
 }
 
@@ -133,6 +133,49 @@ h1, h2, h3, h4 {
 .btn-ghost:hover {
   background: rgba(255, 255, 255, 0.05);
   color: #fff;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.form-group input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  padding: 0.875rem;
+  border-radius: 8px;
+  color: #fff;
+  font-family: inherit;
+  transition: var(--transition-smooth);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
+.alert {
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+}
+
+.alert-error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
 }
 
 /* Animations */
