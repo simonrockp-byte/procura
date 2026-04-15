@@ -23,38 +23,102 @@ export default function Login() {
   }
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--bg-color)' }}>
-      {/* --- Left Side: Login Form --- */}
-      <div style={{ 
-        flex: '1', 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center', 
-        padding: '2rem',
-        zIndex: 1
+    <div style={{ display: 'flex', minHeight: '100vh', background: '#f1f5f9' }}>
+
+      {/* ── Left: Brand Panel ── */}
+      <div style={{
+        width: 480,
+        flexShrink: 0,
+        background: '#0f172a',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        padding: '3rem',
+        position: 'relative',
+        overflow: 'hidden',
       }}>
-        <div className="glass-panel animate-fade-in" style={{ width: '100%', maxWidth: 420, padding: '3rem' }}>
-          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-            <div style={{ 
-              width: 72, 
-              height: 72, 
-              margin: '0 auto 1.25rem',
-              borderRadius: '16px',
-              overflow: 'hidden',
-              boxShadow: '0 8px 16px var(--accent-glow)',
-              background: '#020617'
-            }}>
-              <img 
-                src="/procura-logo.png" 
-                alt="Procura Logo" 
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-              />
-            </div>
-            <h1 className="text-gradient" style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>PROCURA</h1>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>Procurement Compliance Platform</p>
+        {/* Subtle glow */}
+        <div style={{
+          position: 'absolute', top: '-20%', right: '-20%',
+          width: '70%', height: '70%',
+          background: 'radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 70%)',
+          pointerEvents: 'none',
+        }} />
+        <div style={{
+          position: 'absolute', bottom: '-20%', left: '-20%',
+          width: '60%', height: '60%',
+          background: 'radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%)',
+          pointerEvents: 'none',
+        }} />
+
+        {/* Logo */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, position: 'relative' }}>
+          <div style={{
+            width: 40, height: 40, borderRadius: 10,
+            background: '#f59e0b',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontWeight: 800, fontSize: 20, color: '#000',
+          }}>P</div>
+          <span style={{ fontWeight: 800, fontSize: '1.1rem', letterSpacing: '0.08em', color: '#f8fafc' }}>
+            PROCURA
+          </span>
+        </div>
+
+        {/* Hero copy */}
+        <div style={{ position: 'relative' }}>
+          <h2 style={{
+            fontSize: '2.75rem', fontWeight: 800, lineHeight: 1.1,
+            color: '#f8fafc', marginBottom: '1.25rem', letterSpacing: '-0.03em',
+          }}>
+            Precision<br />
+            <span style={{ color: '#f59e0b' }}>Procurement</span><br />
+            Tracking.
+          </h2>
+          <p style={{ fontSize: '0.95rem', color: '#94a3b8', lineHeight: 1.7, maxWidth: 320 }}>
+            From requisition to delivery confirmation — maintain a 100% compliant, immutable audit trail.
+          </p>
+          <div style={{ display: 'flex', gap: '2rem', marginTop: '2.5rem' }}>
+            {[['100%', 'Compliant'], ['Immutable', 'Audit Logs'], ['72h', 'SLA Tracked']].map(([val, label]) => (
+              <div key={label}>
+                <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#f8fafc' }}>{val}</div>
+                <div style={{ fontSize: '0.7rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', marginTop: 2 }}>{label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Dot grid decoration */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          backgroundImage: 'radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)',
+          backgroundSize: '28px 28px',
+          pointerEvents: 'none',
+        }} />
+
+        <p style={{ fontSize: '0.75rem', color: '#334155', position: 'relative' }}>
+          CODX Systems Tech · Enterprise Security Enabled
+        </p>
+      </div>
+
+      {/* ── Right: Form Panel ── */}
+      <div style={{
+        flex: 1,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '2rem',
+      }}>
+        <div className="animate-fade-in" style={{ width: '100%', maxWidth: 400 }}>
+          <div style={{ marginBottom: '2.5rem' }}>
+            <h1 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#0f172a', marginBottom: 6 }}>
+              Sign in
+            </h1>
+            <p style={{ color: '#64748b', fontSize: '0.9rem' }}>
+              Enter your organisation ID and credentials to continue.
+            </p>
           </div>
 
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
             <div className="form-group">
               <label>Organisation ID</label>
               <input
@@ -63,18 +127,22 @@ export default function Login() {
                 value={form.org_slug}
                 onChange={set('org_slug')}
                 required
+                autoComplete="organization"
               />
             </div>
+
             <div className="form-group">
               <label>Email Address</label>
               <input
                 type="email"
-                placeholder="officer@organisation.com"
+                placeholder="you@organisation.com"
                 value={form.email}
                 onChange={set('email')}
                 required
+                autoComplete="email"
               />
             </div>
+
             <div className="form-group">
               <label>Password</label>
               <input
@@ -83,89 +151,27 @@ export default function Login() {
                 value={form.password}
                 onChange={set('password')}
                 required
+                autoComplete="current-password"
               />
             </div>
 
-            {error && (
-              <div className="alert alert-error">{error}</div>
-            )}
+            {error && <div className="alert alert-error">{error}</div>}
 
-            <button type="submit" className="btn-primary" style={{ marginTop: '0.5rem', padding: '1rem', fontSize: '1rem' }} disabled={loading}>
-              {loading ? 'Authenticating…' : 'Sign In to Dashboard'}
+            <button
+              type="submit"
+              className="btn-primary"
+              style={{ padding: '0.875rem', fontSize: '0.95rem', marginTop: '0.25rem', justifyContent: 'center' }}
+              disabled={loading}
+            >
+              {loading ? 'Signing in…' : 'Sign In to Dashboard'}
             </button>
           </form>
 
-          <p style={{ textAlign: 'center', marginTop: '2.5rem', color: 'var(--text-secondary)', fontSize: '0.8rem', opacity: 0.6 }}>
-            CODX Systems Tech — Enterprise Security Enabled
+          <p style={{ textAlign: 'center', marginTop: '2rem', color: '#94a3b8', fontSize: '0.75rem' }}>
+            Don't have access? Contact your organisation administrator.
           </p>
         </div>
       </div>
-
-      {/* --- Right Side: Hero Visual --- */}
-      <div className="hero-section" style={{ 
-        flex: '1.2', 
-        background: 'linear-gradient(135deg, #0f172a 0%, #020617 100%)',
-        position: 'relative',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden',
-        borderLeft: '1px solid var(--glass-border)'
-      }}>
-        {/* Dynamic Background Blurs */}
-        <div style={{ 
-          position: 'absolute', 
-          top: '20%', 
-          left: '20%', 
-          width: '60%', 
-          height: '60%', 
-          background: 'radial-gradient(circle, var(--accent-glow) 0%, transparent 70%)',
-          filter: 'blur(60px)',
-          opacity: 0.4
-        }} />
-        
-        <div style={{ position: 'relative', zIndex: 2, padding: '4rem', maxWidth: 600 }}>
-          <h2 style={{ fontSize: '3.5rem', lineHeight: 1.1, marginBottom: '2rem' }}>
-            Precision <span className="text-gradient">Procurement</span> Tracking.
-          </h2>
-          <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '3rem' }}>
-            From requisition to delivery confirmation, maintain a 100% compliant audit trail with the industry's most robust SaaS platform.
-          </p>
-          
-          <div style={{ display: 'flex', gap: '2rem' }}>
-            <div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#fff' }}>100%</div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>Compliant</div>
-            </div>
-            <div style={{ width: 1, height: 40, background: 'var(--glass-border)' }} />
-            <div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#fff' }}>Immutable</div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>Audit Logs</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Decorative Grid */}
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundImage: 'radial-gradient(var(--glass-border) 1px, transparent 1px)',
-          backgroundSize: '40px 40px',
-          opacity: 0.2
-        }} />
-      </div>
-
-      {/* Media Query simulation for the hero section */}
-      <style>{`
-        @media (max-width: 1024px) {
-          .hero-section { display: none !important; }
-        }
-        @media (min-width: 1025px) {
-          .hero-section { display: flex !important; }
-        }
-      `}</style>
     </div>
   );
 }

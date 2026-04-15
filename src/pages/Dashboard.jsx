@@ -108,7 +108,7 @@ export default function Dashboard() {
               <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>No active escalations.</div>
             ) : (
               escalations.open.slice(0, 3).map(e => (
-                <div key={e.id} className="glass-card" style={{ padding: '0.75rem', background: 'rgba(244,63,94,0.05)', borderColor: 'rgba(244,63,94,0.2)' }}>
+                <div key={e.id} className="glass-card" style={{ padding: '0.75rem', background: '#fef2f2', borderColor: '#fecaca' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
                     <span style={{ fontWeight: 600, fontSize: '0.85rem' }}>{e.ref_number} — SLA Overdue</span>
                     <span className="status-badge status-rejected" style={{ fontSize: '0.7rem' }}>{e.tier}</span>
@@ -156,7 +156,7 @@ export default function Dashboard() {
                   <span>{v.name}</span>
                   <span style={{ fontWeight: 600 }}>{v.compliance_score}%</span>
                 </div>
-                <div style={{ height: 6, background: 'rgba(255,255,255,0.05)', borderRadius: 3, overflow: 'hidden' }}>
+                <div style={{ height: 6, background: '#f1f5f9', borderRadius: 3, overflow: 'hidden' }}>
                   <div style={{ 
                     height: '100%', 
                     width: `${v.compliance_score}%`, 

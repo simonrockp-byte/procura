@@ -108,7 +108,7 @@ export default function AuditLog() {
                   <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap', marginBottom: 2 }}>
                     <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{row.table_name}</span>
                     {row.record_id && (
-                      <span style={{ fontFamily: 'monospace', fontSize: '0.72rem', color: 'var(--text-secondary)', background: 'rgba(255,255,255,0.05)', padding: '1px 6px', borderRadius: 4 }}>
+                      <span style={{ fontFamily: 'monospace', fontSize: '0.72rem', color: 'var(--text-secondary)', background: '#f1f5f9', padding: '1px 6px', borderRadius: 4 }}>
                         {row.record_id.slice(0, 8)}…
                       </span>
                     )}
@@ -130,7 +130,7 @@ export default function AuditLog() {
               {expanded === row.id && (
                 <div style={{
                   padding: '1rem 1.5rem 1.25rem',
-                  background: 'rgba(0,0,0,0.2)',
+                  background: '#f8fafc',
                   borderBottom: i < rows.length - 1 ? '1px solid var(--glass-border)' : 'none',
                 }}>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '0.75rem', fontSize: '0.82rem' }}>
@@ -146,9 +146,9 @@ export default function AuditLog() {
                   <div>
                     <div style={{ color: 'var(--text-secondary)', fontSize: '0.78rem', marginBottom: 4 }}>Payload</div>
                     <pre style={{
-                      background: 'rgba(0,0,0,0.3)', padding: '0.75rem', borderRadius: 8,
+                      background: '#f1f5f9', padding: '0.75rem', borderRadius: 8,
                       fontSize: '0.78rem', overflowX: 'auto', margin: 0,
-                      border: '1px solid var(--glass-border)', color: '#94a3b8',
+                      border: '1px solid var(--border)', color: '#374151',
                     }}>
                       {JSON.stringify(typeof row.payload === 'string' ? JSON.parse(row.payload) : row.payload, null, 2)}
                     </pre>

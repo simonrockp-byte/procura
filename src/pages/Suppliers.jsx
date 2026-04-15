@@ -153,7 +153,7 @@ export default function Suppliers() {
                   </td>
                   <td>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <div style={{ flex: 1, height: 6, background: 'rgba(255,255,255,0.05)', borderRadius: 3 }}>
+                      <div style={{ flex: 1, height: 6, background: '#f1f5f9', borderRadius: 3 }}>
                         <div style={{ width: `${s.compliance_score}%`, height: '100%', background: scoreColor(s.compliance_score), borderRadius: 3, transition: 'width 0.4s' }} />
                       </div>
                       <span style={{ fontWeight: 600, color: scoreColor(s.compliance_score), minWidth: 32, fontSize: '0.85rem' }}>

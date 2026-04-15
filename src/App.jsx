@@ -28,22 +28,24 @@ function Sidebar({ tab, setTab, user, logout }) {
   return (
     <aside className="sidebar">
       <div className="sidebar-logo">
-        <div style={{ width:32, height:32, background:'var(--accent-color)', borderRadius:8, display:'flex', alignItems:'center', justifyContent:'center', fontWeight:800, color:'#000', fontSize:18, flexShrink:0 }}>P</div>
+        <div style={{ width:30, height:30, background:'var(--accent)', borderRadius:7, display:'flex', alignItems:'center', justifyContent:'center', fontWeight:800, color:'#000', fontSize:16, flexShrink:0 }}>P</div>
         <span>PROCURA</span>
       </div>
       <nav className="sidebar-nav">
         {visible.map(n => (
           <a key={n.id} className={`nav-item${tab === n.id ? ' active' : ''}`} onClick={() => setTab(n.id)}>
-            {n.icon} {n.label}
+            <span style={{ fontSize: '1rem' }}>{n.icon}</span> {n.label}
           </a>
         ))}
       </nav>
-      <div style={{ marginTop:'auto', borderTop:'1px solid var(--glass-border)', paddingTop:'1.5rem' }}>
-        <div style={{ padding:'0.75rem 1rem', marginBottom:'0.5rem' }}>
-          <div style={{ fontWeight:600, fontSize:'0.9rem' }}>{user?.full_name}</div>
-          <div style={{ color:'var(--text-secondary)', fontSize:'0.78rem' }}>{user?.role} · {user?.email}</div>
+      <div className="sidebar-footer">
+        <div className="sidebar-user">
+          <div className="sidebar-user-name">{user?.full_name}</div>
+          <div className="sidebar-user-meta">{user?.role} · {user?.email}</div>
         </div>
-        <a className="nav-item" onClick={logout} style={{ color:'#f43f5e', cursor: 'pointer' }}>🚪 Sign Out</a>
+        <a className="nav-item" onClick={logout} style={{ color:'#f87171' }}>
+          <span style={{ fontSize:'1rem' }}>🚪</span> Sign Out
+        </a>
       </div>
     </aside>
   );

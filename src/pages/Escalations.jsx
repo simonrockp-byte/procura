@@ -80,8 +80,8 @@ export default function Escalations() {
               return (
                 <div key={e.id} className="glass-panel" style={{
                   padding: '1.5rem',
-                  borderColor: isUrgent ? 'rgba(244,63,94,0.4)' : 'rgba(245,158,11,0.3)',
-                  background: isUrgent ? 'rgba(244,63,94,0.04)' : 'rgba(245,158,11,0.04)',
+                  borderColor: isUrgent ? '#fecaca' : '#fde68a',
+                  background: isUrgent ? '#fef2f2' : '#fffbeb',
                 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', flexWrap: 'wrap' }}>
                     <div style={{ flex: 1 }}>

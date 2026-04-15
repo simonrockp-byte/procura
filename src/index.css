@@ -1,189 +1,222 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --bg-color: #020617;
-  --surface-color: rgba(15, 23, 42, 0.7);
-  --accent-color: #f59e0b; /* Golden Amber */
-  --accent-glow: rgba(245, 158, 11, 0.2);
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  --card-radius: 16px;
-  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* ─── Core palette ─────────────────────────────────────────── */
+  --bg:              #f1f5f9;
+  --surface:         #ffffff;
+  --surface-raised:  #ffffff;
+
+  --sidebar-bg:      #0f172a;
+  --sidebar-hover:   rgba(255, 255, 255, 0.06);
+  --sidebar-active:  rgba(245, 158, 11, 0.12);
+  --sidebar-border:  rgba(255, 255, 255, 0.07);
+
+  --accent:          #f59e0b;
+  --accent-dark:     #d97706;
+  --accent-light:    rgba(245, 158, 11, 0.12);
+
+  --text-primary:    #0f172a;
+  --text-secondary:  #64748b;
+  --text-tertiary:   #94a3b8;
+  --text-inverse:    #f8fafc;
+
+  --border:          #e2e8f0;
+  --border-focus:    #f59e0b;
+
+  --shadow-xs: 0 1px 2px rgba(15,23,42,0.06);
+  --shadow-sm: 0 1px 3px rgba(15,23,42,0.08), 0 1px 2px rgba(15,23,42,0.04);
+  --shadow-md: 0 4px 8px rgba(15,23,42,0.07), 0 2px 4px rgba(15,23,42,0.04);
+  --shadow-lg: 0 12px 24px rgba(15,23,42,0.09), 0 4px 8px rgba(15,23,42,0.04);
+
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  14px;
+  --radius-xl:  18px;
+
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: all 0.18s var(--ease);
+
+  /* ─── Status palette ───────────────────────────────────────── */
+  --status-draft:     #94a3b8;
+  --status-approved:  #3b82f6;
+  --status-ordered:   #8b5cf6;
+  --status-delivered: #06b6d4;
+  --status-paid:      #10b981;
+  --status-disputed:  #ef4444;
+
+  /* Legacy aliases used in Dashboard pipeline bar */
+  --bg-color: var(--bg);
+  --surface-color: var(--surface);
+  --accent-color: var(--accent);
+  --accent-glow: var(--accent-light);
+  --text-secondary: #64748b;
+  --glass-border: var(--border);
+  --glass-shadow: var(--shadow-md);
+  --card-radius: var(--radius-lg);
+  --transition-smooth: var(--transition);
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+/* ─── Reset ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
 
 body {
-  margin: 0;
-  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--bg-color);
+  background: var(--bg);
   color: var(--text-primary);
   overflow-x: hidden;
 }
 
-/* Background Gradients */
-body::before {
-  content: '';
-  position: fixed;
-  top: -10%;
-  right: -10%;
-  width: 40%;
-  height: 40%;
-  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-  z-index: -1;
-  pointer-events: none;
+#root { display: block; min-height: 100vh; }
+
+/* ─── Typography ─────────────────────────────────────────────── */
+h1, h2, h3, h4, h5 {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+  color: var(--text-primary);
 }
 
-body::after {
-  content: '';
-  position: fixed;
-  bottom: -10%;
-  left: -10%;
-  width: 50%;
-  height: 50%;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
-  z-index: -1;
-  pointer-events: none;
-}
-
-/* Layout */
-#root {
-  display: block; /* Removed flex from root to allow component-level layout control */
-  min-height: 100vh;
-}
-
-/* Glassmorphism Classes */
+/* ─── Surface / Card ─────────────────────────────────────────── */
 .glass-panel {
-  background: var(--surface-color);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  border-radius: var(--card-radius);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--card-radius);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
   padding: 1.5rem;
-  transition: var(--transition-smooth);
+  box-shadow: var(--shadow-xs);
+  transition: var(--transition);
 }
 
 .glass-card:hover {
-  transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(245, 158, 11, 0.3);
+  box-shadow: var(--shadow-md);
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
 }
 
-/* Typography */
-h1, h2, h3, h4 {
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
+/* ─── Gradient text (accent) ─────────────────────────────────── */
 .text-gradient {
-  background: linear-gradient(135deg, #fff 0%, var(--accent-color) 100%);
+  background: linear-gradient(135deg, #0f172a 0%, var(--accent) 120%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* Buttons */
+/* ─── Buttons ────────────────────────────────────────────────── */
 .btn-primary {
-  background: var(--accent-color);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent);
   color: #000;
   border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
-  transition: var(--transition-smooth);
-  box-shadow: 0 4px 12px var(--accent-glow);
+  transition: var(--transition);
+  box-shadow: 0 1px 3px rgba(245,158,11,0.25);
+  white-space: nowrap;
 }
-
-.btn-primary:hover {
-  filter: brightness(1.1);
-  transform: scale(1.02);
-  box-shadow: 0 6px 16px var(--accent-glow);
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-dark);
+  box-shadow: 0 4px 12px rgba(245,158,11,0.35);
+  transform: translateY(-1px);
 }
+.btn-primary:active { transform: translateY(0); }
+.btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
 
 .btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background: transparent;
   color: var(--text-secondary);
-  border: 1px solid var(--glass-border);
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
+  border: 1px solid var(--border);
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
-  transition: var(--transition-smooth);
+  transition: var(--transition);
+  white-space: nowrap;
 }
-
-.btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.05);
-  color: #fff;
+.btn-ghost:hover:not(:disabled) {
+  background: var(--bg);
+  color: var(--text-primary);
+  border-color: #cbd5e1;
 }
+.btn-ghost:disabled { opacity: 0.5; cursor: not-allowed; }
 
+/* ─── Forms ──────────────────────────────────────────────────── */
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 6px;
 }
-
 .form-group label {
   font-size: 0.8rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
-
-.form-group input {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--glass-border);
-  padding: 0.875rem;
-  border-radius: 8px;
-  color: #fff;
+.form-group input,
+.form-group textarea,
+.form-group select,
+.search-input {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 0.875rem;
+  color: var(--text-primary);
   font-family: inherit;
-  transition: var(--transition-smooth);
-}
-
-.form-group input:focus {
+  font-size: 0.9rem;
+  transition: var(--transition);
   outline: none;
-  border-color: var(--accent-color);
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 0 4px var(--accent-glow);
+  width: 100%;
 }
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus,
+.search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(245,158,11,0.12);
+}
+.form-group input::placeholder { color: var(--text-tertiary); }
+.form-group textarea { resize: vertical; min-height: 80px; }
+.form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 2rem; }
 
+/* ─── Alerts ─────────────────────────────────────────────────── */
 .alert {
-  padding: 0.75rem;
-  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
   font-size: 0.875rem;
+  font-weight: 500;
 }
+.alert-error   { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+.alert-warn    { background: #fffbeb; color: #d97706; border: 1px solid #fde68a; }
+.alert-success { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
 
-.alert-error {
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.2);
-  color: #fca5a5;
-}
-
-/* Animations */
+/* ─── Animations ─────────────────────────────────────────────── */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
+@keyframes spin { to { transform: rotate(360deg); } }
 
-.animate-fade-in {
-  animation: fadeIn 0.6s ease-out forwards;
-}
+.animate-fade-in { animation: fadeIn 0.3s var(--ease) forwards; }
