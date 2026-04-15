@@ -52,16 +52,19 @@ export default function Login() {
         }} />
 
         {/* Logo */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, position: 'relative' }}>
-          <div style={{
-            width: 40, height: 40, borderRadius: 10,
-            background: '#f59e0b',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontWeight: 800, fontSize: 20, color: '#000',
-          }}>P</div>
-          <span style={{ fontWeight: 800, fontSize: '1.1rem', letterSpacing: '0.08em', color: '#f8fafc' }}>
-            PROCURA
-          </span>
+        <div style={{ position: 'relative' }}>
+          <img
+            src="/procura-logo.png"
+            alt="Procura"
+            style={{
+              height: 40,
+              width: 'auto',
+              background: '#fff',
+              borderRadius: 8,
+              padding: '5px 10px',
+              display: 'block',
+            }}
+          />
         </div>
 
         {/* Hero copy */}
@@ -110,10 +113,15 @@ export default function Login() {
       }}>
         <div className="animate-fade-in" style={{ width: '100%', maxWidth: 400 }}>
           <div style={{ marginBottom: '2.5rem' }}>
-            <h1 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#0f172a', marginBottom: 6 }}>
+            <img
+              src="/procura-logo.png"
+              alt="Procura"
+              style={{ height: 44, width: 'auto', marginBottom: '1.75rem', display: 'block' }}
+            />
+            <h1 style={{ fontSize: '1.6rem', fontWeight: 700, color: '#0f172a', marginBottom: 6 }}>
               Sign in
             </h1>
-            <p style={{ color: '#64748b', fontSize: '0.9rem' }}>
+            <p style={{ color: '#64748b', fontSize: '0.875rem' }}>
               Enter your organisation ID and credentials to continue.
             </p>
           </div>

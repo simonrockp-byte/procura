@@ -28,8 +28,18 @@ function Sidebar({ tab, setTab, user, logout }) {
   return (
     <aside className="sidebar">
       <div className="sidebar-logo">
-        <div style={{ width:30, height:30, background:'var(--accent)', borderRadius:7, display:'flex', alignItems:'center', justifyContent:'center', fontWeight:800, color:'#000', fontSize:16, flexShrink:0 }}>P</div>
-        <span>PROCURA</span>
+        <img
+          src="/procura-logo.png"
+          alt="Procura"
+          style={{
+            height: 36,
+            width: 'auto',
+            background: '#fff',
+            borderRadius: 8,
+            padding: '4px 8px',
+            display: 'block',
+          }}
+        />
       </div>
       <nav className="sidebar-nav">
         {visible.map(n => (
